@@ -5,6 +5,12 @@
 #include <locale.h>
 #include <windows.h> 
 
+struct student {
+    char famil[20];
+    char name[20];
+    char facult[20];
+    int Nomzach;
+};
 
 int main() {
     SetConsoleCP(1251);       
@@ -78,3 +84,35 @@ int main() {
     printf("\n");
 
     printf("========== ЗАДАНИЕ 5 ==========\n");
+    struct student stud[3] = {
+       {"Иванов", "Иван", "ВТ", 1001},
+       {"Петров", "Петр", "ФВТ", 1002},
+       {"Сидоров", "Алексей", "ВТ", 1003}
+    };
+
+    char search_famil[20];
+    int found = 0;
+
+    printf("База студентов загружена.\n");
+    printf("Введите фамилию для поиска (например, Петров): ");
+
+    scanf_s("%19s", search_famil, (unsigned)sizeof(search_famil));
+
+    for (i = 0; i < 3; i++) {
+        if (strcmp(stud[i].famil, search_famil) == 0) {
+            printf("\n--- Студент найден ---\n");
+            printf("Фамилия: %s\nИмя: %s\nФакультет: %s\nНомер зачетки: %d\n",
+                stud[i].famil, stud[i].name, stud[i].facult, stud[i].Nomzach);
+            found = 1;
+            break;
+        }
+    }
+
+    if (found == 0) {
+        printf("\nСтудент с фамилией '%s' не найден.\n", search_famil);
+    }
+
+    printf("\nЛабораторная работа завершена!\n");
+
+    return 0;
+}
